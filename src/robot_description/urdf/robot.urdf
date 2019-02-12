@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <robot name="robot1">
 
-    <!--Each physical part of the robot is described as a link-->
+    <!--Each physical component of the robot is described as a link-->
     <link name="base_link">
         <!--Describes what we want to see in the simulator-->
         <visual>

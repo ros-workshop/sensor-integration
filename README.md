@@ -12,18 +12,23 @@ us to test various techniques for achieving different robot behaviours.
 ### URDF
 
 Unified Robot Description Format (URDF) is an XML format that describes a robot,
-its parts, its joints, dimensions, and so on. A 3D robot on
-ROS, for example, [the Robonaut (NASA)](https://github.com/gkjohnson/nasa-urdf-robots),
-a URDF file is associated with it. Let's build a mobile-robot which has an arm
+its parts, its joints, dimensions, etc. For A 3D robot on ROS, for example,
+[the Robonaut (NASA)](https://github.com/gkjohnson/nasa-urdf-robots), a URDF
+file is associated with it.
+
+Let's build a mobile-robot which has an arm
 mounted on it with a gripper and control it in the simulated environment.
 
 #### Create the robot model
 
-Let's create a mobile robot model which we'll command to move. Please go through
-the URDF file `robot.urdf` in the urdf/ directory of robot_description folder.
+In this section, we'll be looking into the `robot_description package`. Please go
+through the URDF file `robot.urdf` in the urdf/ directory of robot_description/.
 
-Check whether model is complete, and the list of components using:
+Check whether model is complete, and the list of components using. We see few
+parent and children links as a result.
+
 ```
+cd src/robot_description/urdf
 check_urdf robot.urdf
 ```
 
@@ -42,7 +47,7 @@ soon. For now, let's launch the simulation by doing the following:
 * Create a ROS-launch file named `display.launch` in the launch/ directory of the
 robot_description. Populate it with the following contents.
 
-```
+```XML
 <?xml version="1.0"?>
 <launch>
 	<arg name="model" />
@@ -68,7 +73,8 @@ discoverable in your shell environment (e.g. callable while using `rospack` comm
 roslaunch robot_description display.launch model:=`rospack find robot_description`/urdf/robot.urdf use_gui:=true
 ```
 
-Above command should launch an Rviz window, something similar to image shown below:
+Above command should launch an Rviz window, something similar to the image shown
+below:
 
 ![rviz_window](./resources/images/rviz_launch.png)
 
@@ -76,10 +82,55 @@ Rviz by default sets the Fixed Frame to `map` frame. Please change it to
 `base_link` frame and add `RobotModel` display via the "Add" button.
 
 
+##### Brief description of URDF file
+
+We breakdown the parts of robot.urdf briefly in this section.
+
+* `<link>` element : Describes a rigid body with an inertia, visual features,
+and collision properties.
+
+In the below snippet, we describe the base of the
+robot `base_link` which has a box-geometry with visual attributes like its color.
+
+```XML
+<link name="base_link">
+		<visual>
+				<geometry>
+						<box size="0.2 .3 .1"/>
+				</geometry>
+				<origin rpy="0 0 0" xyz="0 0 0.05"/>
+				<material name="white">
+						<color rgba="1 1 1 1"/>
+				</material>
+		</visual>
+</link>
+```
+
+* `<joint>` element : Describes the kinematics and dynamics of a joint between
+two _links_, along with its safety limits.
+
+Below _joint_ description provides details on how the *base_link* and *wheel_1*
+links are connected. Take note of the joint type `fixed`, which means *wheel_1*
+has a fixed connection with *base_link*, with all degrees-of-freedom locked.
+
+ ```XML
+ <joint name="base_to_wheel1" type="fixed">
+		 <parent link="base_link"/>
+		 <child link="wheel_1"/>
+		 <origin xyz="0 0 0"/>
+ </joint>
+ ```
+
+For more information on the XML tags of URDF file, please refer to its
+documentation [here](http://wiki.ros.org/urdf/XML).
+
+
 #### Exercise
 
 You might have noticed a missing component in the robot-model shown on Rviz.
-Complete the model in the URDF file to add the missing component.
+Complete the model in the URDF file to add the missing component. And relaunch
+`display.launch` file using the steps described in the section
+[Launch the robot simulation](#launch-the-robot-simulation).
 
 Look for the solution below in case you can't complete the model.
 
@@ -124,8 +175,7 @@ and velocity), as read from its URDF file. Topic that it publishes on : `/joint_
 * robot_state_publisher : Broadcasts the state of the robot to the
 [TF transform](http://wiki.ros.org/tf2) library. Listens on `/joint_states` topic
 and continuously publishes the relative transforms between the joints on TF using
-its internal kinematic map.
-
+its internal kinematics map to track the joints with respect to one another.
 
 
 ## Sensor Integration
@@ -139,3 +189,7 @@ its internal kinematic map.
 ### Controlling the Robot Base
 
 ### Exercise : Robot moving in circles
+
+### References
+
+1. URDF XML Specification: http://wiki.ros.org/urdf/XML
