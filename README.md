@@ -61,7 +61,7 @@ robot_description. Populate it with the following contents.
 ```
 
 * Build the robot_description directory using `catkin_make`, which will make it
-a ROS-package. From sensor-integration parent directory run the following:
+a ROS-package. From sensor-integration directory run the following:
     * `catkin_make --pkg robot_description`
 
 * Source the development package path, to ensure robot_description package is
@@ -94,15 +94,15 @@ robot `base_link` which has a box-geometry with visual attributes like its color
 
 ```XML
 <link name="base_link">
-		<visual>
-				<geometry>
-						<box size="0.2 .3 .1"/>
-				</geometry>
-				<origin rpy="0 0 0" xyz="0 0 0.05"/>
-				<material name="white">
-						<color rgba="1 1 1 1"/>
-				</material>
-		</visual>
+	<visual>
+		<geometry>
+			<box size="0.2 .3 .1"/>
+		</geometry>
+		<origin rpy="0 0 0" xyz="0 0 0.05"/>
+		<material name="white">
+			<color rgba="1 1 1 1"/>
+		</material>
+	</visual>
 </link>
 ```
 
@@ -114,11 +114,11 @@ links are connected. Take note of the joint type `fixed`, which means *wheel_1*
 has a fixed connection with *base_link*, with all degrees-of-freedom locked.
 
  ```XML
- <joint name="base_to_wheel1" type="fixed">
-		 <parent link="base_link"/>
-		 <child link="wheel_1"/>
-		 <origin xyz="0 0 0"/>
- </joint>
+<joint name="base_to_wheel1" type="fixed">
+	<parent link="base_link"/>
+	<child link="wheel_1"/>
+	<origin xyz="0 0 0"/>
+</joint>
  ```
 
 For more information on the XML tags of URDF file, please refer to its
@@ -139,25 +139,28 @@ Look for the solution below in case you can't complete the model.
 <br>
 
 A link for wheel-4.<br>
+
 ```
-<!--<link name="wheel_4">-->
-    <!--<visual>-->
-        <!--<geometry>-->
-            <!--<cylinder length="0.05" radius="0.05"/>-->
-        <!--</geometry>-->
-        <!--<origin rpy="0 1.5 0" xyz="-0.1 -0.1 0"/>-->
-        <!--<material name="black"/>-->
-    <!--</visual>-->
-<!--</link>-->
+<link name="wheel_4">
+	<visual>
+  	<geometry>
+			<cylinder length="0.05" radius="0.05"/>
+		</geometry>
+		<origin rpy="0 1.5 0" xyz="-0.1 -0.1 0"/>
+		<material name="black"/>
+	</visual>
+</link>
 ```
+
 <br><br>
 A joint connecting wheel-4 to the robot's base-link.<br>
+
 ```
-<!--<joint name="base_to_wheel4" type="fixed">-->
-    <!--<parent link="base_link"/>-->
-    <!--<child link="wheel_4"/>-->
-    <!--<origin xyz="0 0 0"/>-->
-<!--</joint>-->
+<joint name="base_to_wheel4" type="fixed">
+	<parent link="base_link"/>
+	<child link="wheel_4"/>
+	<origin xyz="0 0 0"/>
+</joint>
 ```
 </details>
 
@@ -176,7 +179,6 @@ and velocity), as read from its URDF file. Topic that it publishes on : `/joint_
 [TF transform](http://wiki.ros.org/tf2) library. Listens on `/joint_states` topic
 and continuously publishes the relative transforms between the joints on TF using
 its internal kinematics map to track the joints with respect to one another.
-
 
 ## Sensor Integration
 
