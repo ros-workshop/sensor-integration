@@ -17,20 +17,23 @@ its parts, its joints, dimensions, etc. For A 3D robot on ROS, for example,
 file is associated with it.
 
 Let's build a mobile-robot which has an arm
-mounted on it with a gripper and control it in the simulated environment.
+mounted on it with a gripper and control its movement in a simulated environment.
 
 #### Create the robot model
 
-In this section, we'll be looking into the `robot_description package`. Please go
-through the URDF file `robot.urdf` in the urdf/ directory of robot_description/.
+In this section, we'll work with the `robot_description package` available in
+`src/robot_description` directory in this repository. Please go through the URDF
+file `robot.urdf` in its urdf/ directory which describes our robot.
 
-Check whether model is complete, and the list of components using. We see few
-parent and children links as a result.
+Check whether the model is complete, and the list of components using the below
+commands.
 
 ```
 cd src/robot_description/urdf
 check_urdf robot.urdf
 ```
+
+We see few parent and children links as a result.
 
 #### Launch the robot simulation
 
@@ -167,7 +170,7 @@ A joint connecting wheel-4 to the robot's base-link.<br>
 
 #### Details on simulating modeled robots
 
-Earlier we saw we used two packages in our launch file to spin up our modeled-robot:
+Earlier  we used two packages in our launch file to spin up our modeled-robot:
 [joint_state_publisher](http://wiki.ros.org/joint_state_publisher) and
 [robot_state_publisher](http://wiki.ros.org/robot_state_publisher).
 Few notes on these packages below:

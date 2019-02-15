@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<robot name="robot1">
+
+    <!--Each physical component of the robot is described as a link-->
+    <link name="base_link">
+        <!--Describes what we want to see in the simulator-->
+        <visual>
+            <geometry>
+                <box size="0.2 .3 .1"/>
+            </geometry>
+            <origin rpy="0 0 0" xyz="0 0 0.05"/>
+            <material name="white">
+                <color rgba="1 1 1 1"/>
+            </material>
+        </visual>
+    </link>
+    <link name="wheel_1">
+        <visual>
+            <geometry>
+                <cylinder length="0.05" radius="0.05"/>
+            </geometry>
+            <origin rpy="0 1.5 0" xyz="0.1 0.1 0"/>
+            <material name="black">
+                <color rgba="0 0 0 1"/>
+            </material>
+        </visual>
+    </link>
+    <link name="wheel_2">
+        <visual>
+            <geometry>
+                <cylinder length="0.05" radius="0.05"/>
+            </geometry>
+            <origin rpy="0 1.5 0" xyz="-0.1 0.1 0"/>
+            <material name="black"/>
+        </visual>
+    </link>
+    <link name="wheel_3">
+        <visual>
+            <geometry>
+                <cylinder length="0.05" radius="0.05"/>
+            </geometry>
+            <origin rpy="0 1.5 0" xyz="0.1 -0.1 0"/>
+            <material name="black"/>
+        </visual>
+    </link>
+
+
+    <!--Describes how two links are attached-->
+    <!--Attachment type could be one among fixed, continuous, floating, planar, revolute-->
+    <joint name="base_to_wheel1" type="fixed">
+        <parent link="base_link"/>
+        <child link="wheel_1"/>
+        <origin xyz="0 0 0"/>
+    </joint>
+    <joint name="base_to_wheel2" type="fixed">
+        <parent link="base_link"/>
+        <child link="wheel_2"/>
+        <origin xyz="0 0 0"/>
+    </joint>
+    <joint name="base_to_wheel3" type="fixed">
+        <parent link="base_link"/>
+        <child link="wheel_3"/>
+        <origin xyz="0 0 0"/>
+    </joint>
+
+</robot>
