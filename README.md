@@ -132,7 +132,7 @@ documentation [here](http://wiki.ros.org/urdf/XML).
 
 You might have noticed a missing component in the robot-model shown on Rviz.
 Complete the model in the URDF file to add the missing component. And relaunch
-`display.launch` file using the steps described in the section
+`display.launch` file using the section above:
 [Launch the robot simulation](#launch-the-robot-simulation).
 
 Look for the solution below in case you can't complete the model.
@@ -168,6 +168,25 @@ A joint connecting wheel-4 to the robot's base-link.<br>
 </details>
 
 
+##### Adding collision and inertial properties
+
+We finish our (box) robot description by adding collision and inertial properties
+to its links. These properties are required when we run the simulation in an
+environment supporting a physics engine e.g. Gazebo.
+
+Complete description of the robot could be found in `robot1.urdf` in urdf/
+directory.
+
+Notes:
+* Notice the `<collision>` and `<inertial>` tags for each `<link>` element in
+robot1.urdf.
+* Take note of `robot1.xacro` in urdf/ directory. Xacro formats provide an efficient
+way to reduce the size and complexity of URDF files by [using constants, simple math
+expressions, and macros](http://wiki.ros.org/urdf/Tutorials/Using%20Xacro%20to%20Clean%20Up%20a%20URDF%20File).
+
+For more details on collision and inertial properties, go through their [docs](http://wiki.ros.org/urdf/Tutorials/Adding%20Physical%20and%20Collision%20Properties%20to%20a%20URDF%20Model).
+
+
 #### Details on simulating modeled robots
 
 Earlier  we used two packages in our launch file to spin up our modeled-robot:
@@ -182,6 +201,12 @@ and velocity), as read from its URDF file. Topic that it publishes on : `/joint_
 [TF transform](http://wiki.ros.org/tf2) library. Listens on `/joint_states` topic
 and continuously publishes the relative transforms between the joints on TF using
 its internal kinematics map to track the joints with respect to one another.
+
+
+
+
+
+
 
 ## Sensor Integration
 
@@ -198,3 +223,6 @@ its internal kinematics map to track the joints with respect to one another.
 ### References
 
 1. URDF XML Specification: http://wiki.ros.org/urdf/XML
+2. Collision and Inertial properties: (http://wiki.ros.org/urdf/Tutorials/Adding%20Physical%20and%20Collision%20Properties%20to%20a%20URDF%20Model
+3. Xacro file format: http://wiki.ros.org/urdf/Tutorials/Using%20Xacro%20to%20Clean%20Up%20a%20URDF%20File
+4.

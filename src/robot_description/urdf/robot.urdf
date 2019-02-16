@@ -43,6 +43,7 @@
             <material name="black"/>
         </visual>
     </link>
+    <!--TODO: Exercise: Missing URDF Components-->
 
 
     <!--Describes how two links are attached-->
@@ -62,5 +63,6 @@
         <child link="wheel_3"/>
         <origin xyz="0 0 0"/>
     </joint>
+    <!--TODO: Exercise: Missing URDF Components-->
 
 </robot>
