@@ -5,7 +5,7 @@ Sample code to make Husky move in a circular path
 ```cpp
 #include <ros/ros.h>
 // Include the appropriate header to send Twist messages.
-#include <geometry_msgs/Twist>
+#include <geometry_msgs/Twist.h>
 #include <stdlib.h>
 
 int main(int argc, char **argv) {

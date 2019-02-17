@@ -12,7 +12,7 @@ include_directories(
 )
 
 # Declare circle_driver C++ executable.
-add_executable(random_driver src/circle_driver.cpp)
+add_executable(circle_driver src/circle_driver.cpp)
 
 # Link Catkin libraries against circle_driver executable target.
 target_link_libraries(circle_driver
