@@ -20,6 +20,7 @@ int main(int argc, char **argv) {
 
   while(ros::ok()) {
     // Make Husky move in circles by publishing to husky_velocity_controller/cmd_vel topic.
+    geometry_msgs::Twist msg;
     msg.linear.x = 1.0;
     msg.angular.z = 2.0;
     rate.sleep();

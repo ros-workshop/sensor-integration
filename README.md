@@ -277,7 +277,7 @@ topic to publish `geometry_msgs/Twist` messages to make Husky move.
 rostopic pub -r 10 /husky_velocity_controller/cmd_vel geometry_msgs/Twist  '{linear:  {x: 0.1, y: 0.0, z: 0.0}, angular: {x: 0.0,y: 0.0,z: 0.0}}'
 ```
 
-#### Exercise : Making Husky move in circles
+#### Exercise: Making Husky move in circles
 
 Command Husky so that it moves in a circular path. Make use of
 [husky_controller](src/husky_controller) package in this repository. Complete
@@ -285,6 +285,14 @@ the `circle_driver.cpp` file to publish appropriate message to
  `/husky_velocity_controller/cmd_vel` topic so that it moves in a circular path.
 
 You are welcome to write the `circle_driver` node in Python.
+
+<details>
+<summary> Solution: Making Husky move in circles </summary>
+<br>
+Find a sample way to achieve this task in
+[circle_driver_solution.md](./resources/solution/circle_driver_solution.md)
+
+</details>
 
 ### Stretch Goal : Stopping Husky in front of an object
 
