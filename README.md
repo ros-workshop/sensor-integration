@@ -129,7 +129,7 @@ For more information on the XML tags of URDF file, please refer to its
 documentation [here](http://wiki.ros.org/urdf/XML).
 
 
-#### Exercise
+#### Exercise: Missing URDF Components
 
 You might have noticed a missing component in the robot-model shown on Rviz.
 Complete the model in the URDF file to add the missing component. And relaunch
@@ -169,7 +169,7 @@ A joint connecting wheel-4 to the robot's base-link.<br>
 </details>
 
 
-##### Adding collision and inertial properties
+#### Adding collision and inertial properties
 
 We finish our (box) robot description by adding collision and inertial properties
 to its links. These properties are required when we run the simulation in an
@@ -188,7 +188,7 @@ expressions, and macros](http://wiki.ros.org/urdf/Tutorials/Using%20Xacro%20to%2
 For more details on collision and inertial properties, go through their [docs](http://wiki.ros.org/urdf/Tutorials/Adding%20Physical%20and%20Collision%20Properties%20to%20a%20URDF%20Model).
 
 
-#### Details on simulating modeled robots
+#### Details on simulating modelled robots
 
 Earlier  we used two packages in our launch file to spin up our modeled-robot:
 [joint_state_publisher](http://wiki.ros.org/joint_state_publisher) and
@@ -277,7 +277,7 @@ topic to publish `geometry_msgs/Twist` messages to make Husky move.
 rostopic pub -r 10 /husky_velocity_controller/cmd_vel geometry_msgs/Twist  '{linear:  {x: 0.1, y: 0.0, z: 0.0}, angular: {x: 0.0,y: 0.0,z: 0.0}}'
 ```
 
-#### Exercise : Husky moving in circles
+#### Exercise : Making Husky move in circles
 
 Command Husky so that it moves in a circular path. Make use of
 [husky_controller](src/husky_controller) package in this repository. Complete
@@ -286,7 +286,7 @@ the `circle_driver.cpp` file to publish appropriate message to
 
 You are welcome to write the `circle_driver` node in Python.
 
-### Stretch Goal
+### Stretch Goal : Stopping Husky in front of an object
 
 Add an object on Gazebo, like a box, and make use of the `circle_driver` that
 you wrote in the above exercise (with minor changes), in combination with a
