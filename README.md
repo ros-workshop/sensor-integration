@@ -21,9 +21,10 @@ mounted on it with a gripper and control its movement in a simulated environment
 
 #### Create the robot model
 
-In this section, we'll work with the `robot_description package` available in
-`src/robot_description` directory in this repository. Please go through the URDF
-file `robot.urdf` in its urdf/ directory which describes our robot.
+In this section, we'll work with the
+[robot description package](./src/robot_description) in this repository.
+Please go through the URDF file `robot.urdf` in
+[its urdf directory](./src/robot_description/urdf) which describes our robot.
 
 Check whether the model is complete, and the list of components using the below
 commands.
@@ -204,9 +205,6 @@ its internal kinematics map to track the joints with respect to one another.
 
 
 ## Sensor Integration
-<<<<<<< HEAD
-
-=======
 
 In this section, we'll work with the simulated model of [Clearpath Husky](https://www.clearpathrobotics.com/husky-unmanned-ground-vehicle-robot/).
 We will first launch it in Gazebo, which will provide us the environment that the
@@ -234,14 +232,13 @@ roslaunch husky_viz view_robot.launch  # Launches the Rviz window showing Husky 
 You should be able to see Gazebo and Rviz windows as below.
 
 ![Gazebo Husky](./resources/images/gazebo_husky.png)
->>>>>>> 45d5752bc4a29eb24c9154ada61f417fe5f4ae76
 
 ![Rviz Husky](./resources/images/rviz_husky.png)
 
 Experiment with adding objects (e.g. a box) on Gazebo and view its LiDAR scan
 lines on Rviz.
 
-##### Exercise: Viewing TF tree and topics map
+#### Exercise: Viewing TF tree and topics map
 
 It is (always) recommended to view the TF tree and the map of topics that are
 active. Make use of `tf` and `rqt_graph` package's commands to view this
@@ -269,33 +266,36 @@ rosrun rqt_graph rqt_graph
 ```
 </details>
 
-### Controlling the Robot Base
+### Controlling Husky
 
-<<<<<<< HEAD
-```bash
-rostopic pub -r 10 /cmd_vel geometry_msgs/Twist  '{linear:  {x: 0.1, y: 0.0, z: 0.0}, angular: {x: 0.0,y: 0.0,z: 0.0}}'
-```
-
-### Exercise : Robot moving in circles
-=======
 From the above exercise on viewing topics' map, you might have noticed that Husky
 simulation has a `/husky_velocity_controller/cmd_vel` namespace topic published
 by `/twist_mux` node and subscribed by `gazebo` node. We will make use of this
 topic to publish `geometry_msgs/Twist` messages to make Husky move.
 
-```bash
+```sh
 rostopic pub -r 10 /husky_velocity_controller/cmd_vel geometry_msgs/Twist  '{linear:  {x: 0.1, y: 0.0, z: 0.0}, angular: {x: 0.0,y: 0.0,z: 0.0}}'
 ```
 
+#### Exercise : Husky moving in circles
+
+Command Husky so that it moves in a circular path. Make use of
+[husky_controller](src/husky_controller) package in this repository. Complete
+the `circle_driver.cpp` file to publish appropriate message to
+ `/husky_velocity_controller/cmd_vel` topic so that it moves in a circular path.
+
+You are welcome to write the `circle_driver` node in Python.
+
 ### Stretch Goal
 
-Add an object on Gazebo, like a box, and make use of the LiDAR scan topic to
-stop Husky when it is less than 5 metres away from the box.
->>>>>>> 45d5752bc4a29eb24c9154ada61f417fe5f4ae76
+Add an object on Gazebo, like a box, and make use of the `circle_driver` that
+you wrote in the above exercise (with minor changes), in combination with a
+node sensing LiDAR scans, so that Husky stops when it is less than 5 metres away
+from the box.
+
 
 ### References
 
 1. URDF XML Specification: http://wiki.ros.org/urdf/XML
 2. Collision and Inertial properties: (http://wiki.ros.org/urdf/Tutorials/Adding%20Physical%20and%20Collision%20Properties%20to%20a%20URDF%20Model
 3. Xacro file format: http://wiki.ros.org/urdf/Tutorials/Using%20Xacro%20to%20Clean%20Up%20a%20URDF%20File
-4.
