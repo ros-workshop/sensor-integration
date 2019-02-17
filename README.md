@@ -276,8 +276,6 @@ topic to publish `geometry_msgs/Twist` messages to make Husky move.
 rostopic pub -r 10 /husky_velocity_controller/cmd_vel geometry_msgs/Twist  '{linear:  {x: 0.1, y: 0.0, z: 0.0}, angular: {x: 0.0,y: 0.0,z: 0.0}}'
 ```
 
-### Exercise : Robot moving in circles
-
 ### Stretch Goal
 
 Add an object on Gazebo, like a box, and make use of the LiDAR scan topic to
