@@ -28,7 +28,7 @@ file `robot.urdf` in its urdf/ directory which describes our robot.
 Check whether the model is complete, and the list of components using the below
 commands.
 
-```
+```sh
 cd src/robot_description/urdf
 check_urdf robot.urdf
 ```
@@ -203,22 +203,85 @@ and continuously publishes the relative transforms between the joints on TF usin
 its internal kinematics map to track the joints with respect to one another.
 
 
-
-
-
-
-
 ## Sensor Integration
 
-### Creating transforms – TF Library
+In this section, we'll work with the simulated model of [Clearpath Husky](https://www.clearpathrobotics.com/husky-unmanned-ground-vehicle-robot/).
+We will first launch it in Gazebo, which will provide us the environment that the
+robot will interact with and then we'll control its movements.
 
-### Publishing Sensor Information
+### Gazebo Simulation
 
-### Publishing Odometry Information
+#### Dependencies
+
+`husky_simulator` and `husky_viz` are the packages that we'll be working with.
+Install these dependencies using below commands.
+
+```sh
+sudo apt install ros-kinetic-husky-simulator
+sudo apt install ros-kinetic-husky-viz
+```
+
+#### Running Husky in Gazebo
+
+```sh
+roslaunch husky_gazebo husky_empty_world.launch  # Launches Husky with SICK LiDAR and and IMU, in an empty world within Gazebo.
+roslaunch husky_viz view_robot.launch  # Launches the Rviz window showing Husky model and the measurements received by its LiDAR sensor.
+```
+
+You should be able to see Gazebo and Rviz windows as below.
+
+![Gazebo Husky](./resources/images/gazebo_husky.png)
+
+![Rviz Husky](./resources/images/rviz_husky.png)
+
+Experiment with adding objects (e.g. a box) on Gazebo and view its LiDAR scan
+lines on Rviz.
+
+##### Exercise: Viewing TF tree and topics map
+
+It is (always) recommended to view the TF tree and the map of topics that are
+active. Make use of `tf` and `rqt_graph` package's commands to view this
+information.
+
+<details>
+<summary>Solution: Viewing TF tree and topic </summary>
+<br>
+Run view_frames node.
+<br>
+```
+rosrun tf view_frames
+```
+<br><br>
+View the generated TF tree.
+<br>
+```
+evince frames.pdf
+```
+<br><br>
+Run rqt_graph node to view the topics.
+<br>
+```
+rosrun rqt_graph rqt_graph
+```
+</details>
 
 ### Controlling the Robot Base
 
+From the above exercise on viewing topics' map, you might have noticed that Husky
+simulation has a `/husky_velocity_controller/cmd_vel` namespace topic published
+by `/twist_mux` node and subscribed by `gazebo` node. We will make use of this
+topic to publish `geometry_msgs/Twist` messages to make Husky move.
+
+```bash
+rostopic pub -r 10 /husky_velocity_controller/cmd_vel geometry_msgs/Twist  '{linear:  {x: 0.1, y: 0.0, z: 0.0}, angular: {x: 0.0,y: 0.0,z: 0.0}}'
+```
+
 ### Exercise : Robot moving in circles
+
+### Stretch Goal
+
+Add an object on Gazebo, like a box, and make use of the LiDAR scan topic to
+stop Husky when it is less than 5 metres away from the box.
 
 ### References
 
