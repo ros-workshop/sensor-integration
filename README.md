@@ -279,10 +279,12 @@ rostopic pub -r 10 /husky_velocity_controller/cmd_vel geometry_msgs/Twist  '{lin
 
 #### Exercise: Making Husky move in circles
 
-Command Husky so that it moves in a circular path. Make use of
-[husky_controller](src/husky_controller) package in this repository. Complete
+In this exercise you'll command Husky so that it moves in a
+circular path. Make use of [husky_controller](src/husky_controller)
+package in this repository. Complete
 the `circle_driver.cpp` file to publish appropriate message to
- `/husky_velocity_controller/cmd_vel` topic so that it moves in a circular path.
+`/husky_velocity_controller/cmd_vel` topic so that it moves in a circular
+path.
 
 You are welcome to write the `circle_driver` node in Python.
 
@@ -296,9 +298,12 @@ Find a sample way to achieve this task in
 
 ### Stretch Goal : Stopping Husky in front of an object
 
-Add an object on Gazebo, like a box, and make use of the `circle_driver` that
-you wrote in the above exercise (with minor changes), in combination with a
-node sensing LiDAR scans, so that Husky stops when it is less than 5 metres away
+Add an object on Gazebo like a box in front of Husky and:
+1. Make use of the `circle_driver` that
+you wrote in the above exercise (with minor changes), and
+2. A Node sensing LiDAR scans
+
+so that Husky stops when it is less than 5 metres away
 from the box.
 
 
