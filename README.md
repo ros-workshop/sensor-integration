@@ -203,20 +203,18 @@ and continuously publishes the relative transforms between the joints on TF usin
 its internal kinematics map to track the joints with respect to one another.
 
 
-
-
-
-
-
 ## Sensor Integration
 
-### Creating transforms – TF Library
 
 ### Publishing Sensor Information
 
 ### Publishing Odometry Information
 
 ### Controlling the Robot Base
+
+```bash
+rostopic pub -r 10 /cmd_vel geometry_msgs/Twist  '{linear:  {x: 0.1, y: 0.0, z: 0.0}, angular: {x: 0.0,y: 0.0,z: 0.0}}'
+```
 
 ### Exercise : Robot moving in circles
 
