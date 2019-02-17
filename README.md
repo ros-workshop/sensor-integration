@@ -22,7 +22,7 @@ mounted on it with a gripper and control its movement in a simulated environment
 #### Create the robot model
 
 In this section, we'll work with the
-[robot description package](./src/robot_description) in this repository.
+[robot_description package](./src/robot_description) in this repository.
 Please go through the URDF file `robot.urdf` in
 [its urdf directory](./src/robot_description/urdf) which describes our robot.
 
@@ -48,7 +48,7 @@ packages to be built as dependencies:
 We'll come back to the nodes `joint_state_publisher` and `robot_state_publisher`
 soon. For now, let's launch the simulation by doing the following:
 
-* Create a ROS-launch file named `display.launch` in the launch/ directory of the
+* Create a ROS-launch file named `display.launch` in the launch/ directory of
 robot_description. Populate it with the following contents.
 
 ```XML
@@ -64,15 +64,16 @@ robot_description. Populate it with the following contents.
 </launch>
 ```
 
-* Build the robot_description directory using `catkin_make`, which will make it
+* Build the robot_description package using `catkin_make`, which will make it
 a ROS-package. From sensor-integration directory run the following:
     * `catkin_make --pkg robot_description`
 
 * Source the development package path, to ensure robot_description package is
 discoverable in your shell environment (e.g. callable while using `rospack` command).
-    * `source devel/setup.bash` (or `source deve/setup.zsh` if you're using zsh shell)
+    * `source devel/setup.bash` (or `source devel/setup.zsh` if you're using zsh shell)
 
-* Launch the modeled-robot through the `display.launch` and `robot.urdf` files that we just created.
+* Launch the modelled-robot through the `display.launch` and `robot.urdf` files that we just created.
+
 ```bash
 roslaunch robot_description display.launch model:=`rospack find robot_description`/urdf/robot.urdf use_gui:=true
 ```
@@ -190,7 +191,7 @@ For more details on collision and inertial properties, go through their [docs](h
 
 #### Details on simulating modelled robots
 
-Earlier  we used two packages in our launch file to spin up our modeled-robot:
+Earlier we used two packages in our launch file to spin up our modelled-robot:
 [joint_state_publisher](http://wiki.ros.org/joint_state_publisher) and
 [robot_state_publisher](http://wiki.ros.org/robot_state_publisher).
 Few notes on these packages below:
@@ -200,8 +201,8 @@ and velocity), as read from its URDF file. Topic that it publishes on : `/joint_
 
 * robot_state_publisher : Broadcasts the state of the robot to the
 [TF transform](http://wiki.ros.org/tf2) library. Listens on `/joint_states` topic
-and continuously publishes the relative transforms between the joints on TF using
-its internal kinematics map to track the joints with respect to one another.
+and continuously publishes the relative transforms between the joints on TF, using
+its internal kinematics map that tracks the joints with respect to one another.
 
 
 ## Sensor Integration
@@ -229,7 +230,7 @@ roslaunch husky_gazebo husky_empty_world.launch  # Launches Husky with SICK LiDA
 roslaunch husky_viz view_robot.launch  # Launches the Rviz window showing Husky model and the measurements received by its LiDAR sensor.
 ```
 
-You should be able to see Gazebo and Rviz windows as below.
+You should be able to see Gazebo and Rviz windows as shown below.
 
 ![Gazebo Husky](./resources/images/gazebo_husky.png)
 
@@ -279,12 +280,11 @@ rostopic pub -r 10 /husky_velocity_controller/cmd_vel geometry_msgs/Twist  '{lin
 
 #### Exercise: Making Husky move in circles
 
-In this exercise you'll command Husky so that it moves in a
+In this exercise you'll write a ROS node that commands Husky to move in a
 circular path. Make use of [husky_controller](src/husky_controller)
 package in this repository. Complete
-the `circle_driver.cpp` file to publish appropriate message to
-`/husky_velocity_controller/cmd_vel` topic so that it moves in a circular
-path.
+the `circle_driver.cpp` file to publish appropriate messages to
+`/husky_velocity_controller/cmd_vel` topic.
 
 You are welcome to write the `circle_driver` node in Python.
 
@@ -298,14 +298,17 @@ Find a sample way to achieve this task in
 
 ### Stretch Goal : Stopping Husky in front of an object
 
-Add an object on Gazebo like a box in front of Husky and:
-1. Make use of the `circle_driver` that
-you wrote in the above exercise (with minor changes), and
-2. A Node sensing LiDAR scans
+1. Add an object on Gazebo like a box in front of Husky so that Husky stops when
+it is less than 5 metres away from the box.
 
-so that Husky stops when it is less than 5 metres away
-from the box.
+  * Make use of the logic in `circle_driver` above that publishes commands to
+  Husky's `/husky_velocity_controller/cmd_vel` topic.
 
+  * A ROS node that subscribes to LiDAR scans, observes the distance from an
+  object, and sends commands similar to `circle_driver` node.
+
+2. Find a way to integrate Kinect camera onto the simulated Husky. Going through
+its [source](https://github.com/husky/husky.git) might give you few pointers.
 
 ### References
 
