@@ -256,23 +256,27 @@ Either
 	```
 
 2. And view the generated TF tree.
+
 	```
 	evince frames.pdf
 	```
 
 Or, use rqt_tftree:
-```
-rosrun rqt_tf_tree rqt_tf_tree
-```
+
+	```
+	rosrun rqt_tf_tree rqt_tf_tree
+	```
+
+</details>
 
 <details>
 <summary>Solution: Viewing the ROS node graph</summary>
 
 Run rqt_graph to view the nodes and topics.
 
-```
-rosrun rqt_graph rqt_graph
-```
+	```
+	rosrun rqt_graph rqt_graph
+	```
 
 </details>
 
