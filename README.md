@@ -246,25 +246,34 @@ active. Make use of `tf` and `rqt_graph` package's commands to view this
 information.
 
 <details>
-<summary>Solution: Viewing TF tree and topic </summary>
-<br>
-Run view_frames node.
-<br>
+<summary>Solution: Viewing TF tree</summary>
+
+Either 
+1. Run view_frames node.
+
+	```
+	rosrun tf view_frames
+	```
+
+2. And view the generated TF tree.
+	```
+	evince frames.pdf
+	```
+
+Or, use rqt_tftree:
 ```
-rosrun tf view_frames
+rosrun rqt_tf_tree rqt_tf_tree
 ```
-<br><br>
-View the generated TF tree.
-<br>
-```
-evince frames.pdf
-```
-<br><br>
-Run rqt_graph node to view the topics.
-<br>
+
+<details>
+<summary>Solution: Viewing the ROS node graph</summary>
+
+Run rqt_graph to view the nodes and topics.
+
 ```
 rosrun rqt_graph rqt_graph
 ```
+
 </details>
 
 ### Controlling Husky
