@@ -41,9 +41,9 @@ We see few parent and children links as a result.
 For launching a simulation of an URDF modeled-robot, we require a few
 packages to be built as dependencies:
 
-* urdf_tutorial : `rospack install urdf_tutorial`
-* robot_state_publisher : `rospack install robot_state_publisher`
-* joint_state_publisher : `rospack install joint_state_publisher`
+* urdf_tutorial : `rosdep install urdf_tutorial`
+* robot_state_publisher : `rosdep install robot_state_publisher`
+* joint_state_publisher : `rosdep install joint_state_publisher`
 
 We'll come back to the nodes `joint_state_publisher` and `robot_state_publisher`
 soon. For now, let's launch the simulation by doing the following:
@@ -280,11 +280,11 @@ rostopic pub -r 10 /husky_velocity_controller/cmd_vel geometry_msgs/Twist  '{lin
 
 #### Exercise: Making Husky move in circles
 
-In this exercise you'll write a ROS node that commands Husky to move in a
-circular path. Make use of [husky_controller](src/husky_controller)
-package in this repository. Complete
-the `circle_driver.cpp` file to publish appropriate messages to
-`/husky_velocity_controller/cmd_vel` topic.
+In this exercise you'll write a ROS node that commands the simulated Husky to
+move in a circular path. Make use of [husky_controller](src/husky_controller)
+package in this repository. Complete the `circle_driver.cpp` file to publish appropriate
+messages to `/husky_velocity_controller/cmd_vel` topic. Make sure to compile and
+source the `devel/setup.bash` directory for your node to be included in the _path_.
 
 You are welcome to write the `circle_driver` node in Python.
 
