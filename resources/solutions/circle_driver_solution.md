@@ -23,6 +23,7 @@ int main(int argc, char **argv) {
     geometry_msgs::Twist msg;
     msg.linear.x = 1.0;
     msg.angular.z = 2.0;
+    pub.publish(msg);
     rate.sleep();
   }
 }
