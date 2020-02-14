@@ -219,8 +219,8 @@ robot will interact with and then we'll control its movements.
 Install these dependencies using below commands.
 
 ```sh
-sudo apt install ros-kinetic-husky-simulator
-sudo apt install ros-kinetic-husky-viz
+sudo apt install ros-melodic-husky-simulator
+sudo apt install ros-melodic-husky-viz
 ```
 
 #### Running Husky in Gazebo
