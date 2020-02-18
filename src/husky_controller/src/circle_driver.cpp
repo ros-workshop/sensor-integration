@@ -13,7 +13,8 @@ int main(int argc, char **argv) {
 
   while(ros::ok()) {
     geometry_msgs::Twist msg;
-    msg.angular={0.0,0.0,0.5};
+    msg.linear={2.0,0.0,0.0};
+    msg.angular={0.0,0.0,1.8};
     pub.publish(msg);
     // TODO: Make Husky move in circles by publishing to husky_velocity_controller/cmd_vel topic.
 
