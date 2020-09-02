@@ -53,15 +53,17 @@ robot_description. Populate it with the following contents.
 
 ```XML
 <?xml version="1.0"?>
-<launch>
-	<arg name="model" />
-	<arg name="gui" default="False" />
-	<param name="robot_description" command="$(find xacro)/xacro --inorder $(arg model)" />
-	<param name="use_gui" value="$(arg gui)"/>
-	<node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
-	<node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
-	<node name="rviz" pkg="rviz" type="rviz" args="-d $(find urdf_tutorial)/urdf.rviz" />
-</launch>
+    <launch>
+        <arg name="model" />
+        <arg name="gui" default="False" />
+
+        <param name="robot_description" command="$(find xacro)/xacro --inorder $(arg model)" />
+        <param name="use_gui" value="$(arg gui)"/>
+        
+        <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
+        <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+        <node name="rviz" pkg="rviz" type="rviz" args="-d $(find urdf_tutorial)/urdf.rviz" />
+    </launch>
 ```
 
 * Build the robot_description package using `catkin_make`, which will make it
@@ -145,26 +147,26 @@ Look for the solution below in case you can't complete the model.
 
 A link for wheel-4.<br>
 
-```
+```XML
 <link name="wheel_4">
-	<visual>
-  	<geometry>
-			<cylinder length="0.05" radius="0.05"/>
-		</geometry>
-		<origin rpy="0 1.5 0" xyz="-0.1 -0.1 0"/>
-		<material name="black"/>
-	</visual>
+    <visual>
+        <geometry>
+            <cylinder length="0.05" radius="0.05"/>
+        </geometry>
+        <origin rpy="0 1.5 0" xyz="-0.1 -0.1 0"/>
+        <material name="black"/>
+    </visual>
 </link>
 ```
 
 <br><br>
 A joint connecting wheel-4 to the robot's base-link.<br>
 
-```
+```XML
 <joint name="base_to_wheel4" type="fixed">
-	<parent link="base_link"/>
-	<child link="wheel_4"/>
-	<origin xyz="0 0 0"/>
+    <parent link="base_link"/>
+    <child link="wheel_4"/>
+    <origin xyz="0 0 0"/>
 </joint>
 ```
 </details>
