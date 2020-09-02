@@ -11,7 +11,7 @@ us to test various techniques for achieving different robot behaviours.
 
 ### URDF
 
-Unified Robot Description Format (URDF) is an XML format that describes a robot,
+[Unified Robot Description Format (URDF)][urdf] is an XML format that describes a robot,
 its parts, its joints, dimensions, etc. For A 3D robot on ROS, for example,
 [the Robonaut (NASA)](https://github.com/gkjohnson/nasa-urdf-robots), a URDF
 file is associated with it.
@@ -101,15 +101,15 @@ robot `base_link` which has a box-geometry with visual attributes like its color
 
 ```XML
 <link name="base_link">
-	<visual>
-		<geometry>
-			<box size="0.2 .3 .1"/>
-		</geometry>
-		<origin rpy="0 0 0" xyz="0 0 0.05"/>
-		<material name="white">
-			<color rgba="1 1 1 1"/>
-		</material>
-	</visual>
+    <visual>
+        <geometry>
+            <box size="0.2 .3 .1"/>
+        </geometry>
+        <origin rpy="0 0 0" xyz="0 0 0.05"/>
+        <material name="white">
+            <color rgba="1 1 1 1"/>
+        </material>
+    </visual>
 </link>
 ```
 
@@ -330,3 +330,6 @@ its [source](https://github.com/husky/husky.git) might give you few pointers.
 1. URDF XML Specification: http://wiki.ros.org/urdf/XML
 2. Collision and Inertial properties: (http://wiki.ros.org/urdf/Tutorials/Adding%20Physical%20and%20Collision%20Properties%20to%20a%20URDF%20Model
 3. Xacro file format: http://wiki.ros.org/urdf/Tutorials/Using%20Xacro%20to%20Clean%20Up%20a%20URDF%20File
+
+
+[urdf]: http://wiki.ros.org/urdf/XML/model
