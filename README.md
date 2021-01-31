@@ -11,7 +11,7 @@ us to test various techniques for achieving different robot behaviours.
 
 ### URDF
 
-Unified Robot Description Format (URDF) is an XML format that describes a robot,
+[Unified Robot Description Format (URDF)][urdf] is an XML format that describes a robot,
 its parts, its joints, dimensions, etc. For A 3D robot on ROS, for example,
 [the Robonaut (NASA)](https://github.com/gkjohnson/nasa-urdf-robots), a URDF
 file is associated with it.
@@ -53,15 +53,17 @@ robot_description. Populate it with the following contents.
 
 ```XML
 <?xml version="1.0"?>
-<launch>
-	<arg name="model" />
-	<arg name="gui" default="False" />
-	<param name="robot_description" command="$(find xacro)/xacro --inorder $(arg model)" />
-	<param name="use_gui" value="$(arg gui)"/>
-	<node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
-	<node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
-	<node name="rviz" pkg="rviz" type="rviz" args="-d $(find urdf_tutorial)/urdf.rviz" />
-</launch>
+    <launch>
+        <arg name="model" />
+        <arg name="gui" default="False" />
+
+        <param name="robot_description" command="$(find xacro)/xacro --inorder $(arg model)" />
+        <param name="use_gui" value="$(arg gui)"/>
+        
+        <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
+        <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+        <node name="rviz" pkg="rviz" type="rviz" args="-d $(find urdf_tutorial)/urdf.rviz" />
+    </launch>
 ```
 
 * Build the robot_description package using `catkin_make`, which will make it
@@ -99,15 +101,15 @@ robot `base_link` which has a box-geometry with visual attributes like its color
 
 ```XML
 <link name="base_link">
-	<visual>
-		<geometry>
-			<box size="0.2 .3 .1"/>
-		</geometry>
-		<origin rpy="0 0 0" xyz="0 0 0.05"/>
-		<material name="white">
-			<color rgba="1 1 1 1"/>
-		</material>
-	</visual>
+    <visual>
+        <geometry>
+            <box size="0.2 .3 .1"/>
+        </geometry>
+        <origin rpy="0 0 0" xyz="0 0 0.05"/>
+        <material name="white">
+            <color rgba="1 1 1 1"/>
+        </material>
+    </visual>
 </link>
 ```
 
@@ -145,26 +147,26 @@ Look for the solution below in case you can't complete the model.
 
 A link for wheel-4.<br>
 
-```
+```XML
 <link name="wheel_4">
-	<visual>
-  	<geometry>
-			<cylinder length="0.05" radius="0.05"/>
-		</geometry>
-		<origin rpy="0 1.5 0" xyz="-0.1 -0.1 0"/>
-		<material name="black"/>
-	</visual>
+    <visual>
+        <geometry>
+            <cylinder length="0.05" radius="0.05"/>
+        </geometry>
+        <origin rpy="0 1.5 0" xyz="-0.1 -0.1 0"/>
+        <material name="black"/>
+    </visual>
 </link>
 ```
 
 <br><br>
 A joint connecting wheel-4 to the robot's base-link.<br>
 
-```
+```XML
 <joint name="base_to_wheel4" type="fixed">
-	<parent link="base_link"/>
-	<child link="wheel_4"/>
-	<origin xyz="0 0 0"/>
+    <parent link="base_link"/>
+    <child link="wheel_4"/>
+    <origin xyz="0 0 0"/>
 </joint>
 ```
 </details>
@@ -328,3 +330,6 @@ its [source](https://github.com/husky/husky.git) might give you few pointers.
 1. URDF XML Specification: http://wiki.ros.org/urdf/XML
 2. Collision and Inertial properties: (http://wiki.ros.org/urdf/Tutorials/Adding%20Physical%20and%20Collision%20Properties%20to%20a%20URDF%20Model
 3. Xacro file format: http://wiki.ros.org/urdf/Tutorials/Using%20Xacro%20to%20Clean%20Up%20a%20URDF%20File
+
+
+[urdf]: http://wiki.ros.org/urdf/XML/model
