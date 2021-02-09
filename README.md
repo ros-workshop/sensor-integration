@@ -66,9 +66,9 @@ robot_description. Populate it with the following contents.
     </launch>
 ```
 
-* Build the robot_description package using `catkin_make`, which will make it
+* Build the robot_description package using `catkin build`, which will make it
 a ROS-package. From sensor-integration directory run the following:
-    * `catkin_make --pkg robot_description`
+    * `catkin build robot_description`
 
 * Source the development package path, to ensure robot_description package is
 discoverable in your shell environment (e.g. callable while using `rospack` command).
