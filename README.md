@@ -29,27 +29,40 @@ Please go through the URDF file `robot.urdf` in
 Check whether the model is complete, and the list of components using the below
 commands.
 
-```sh
+**Note**: You may need to run `sudo apt-get install liburdfdom-tools`.
+
+```bash
 cd src/robot_description/urdf
 check_urdf robot.urdf
 ```
 
-We see few parent and children links as a result.
+The following output will be shown.
+
+```shell
+robot name is: robot1
+---------- Successfully Parsed XML ---------------
+root Link: base_link has 3 child(ren)
+    child(1):  wheel_1
+    child(2):  wheel_2
+    child(3):  wheel_3
+```
+
+**Exercise**: Update `robot.urdf` to include the missing component
 
 #### Launch the robot simulation
 
 For launching a simulation of an URDF modeled-robot, we require a few
 packages to be built as dependencies:
 
-* urdf_tutorial : `rosdep install urdf_tutorial`
-* robot_state_publisher : `rosdep install robot_state_publisher`
-* joint_state_publisher : `rosdep install joint_state_publisher`
+* **urdf_tutorial** : `rosdep install urdf_tutorial`
+* **robot_state_publisher** : `rosdep install robot_state_publisher`
+* **joint_state_publisher** : `rosdep install joint_state_publisher`
 
 We'll come back to the nodes `joint_state_publisher` and `robot_state_publisher`
 soon. For now, let's launch the simulation by doing the following:
 
-* Create a ROS-launch file named `display.launch` in the launch/ directory of
-robot_description. Populate it with the following contents.
+* Create a ROS-launch file named `display.launch` in [`src/robot_description/launch`](src/robot_description/launch) 
+* Populate it with the following contents.
 
 ```XML
 <?xml version="1.0"?>
@@ -66,28 +79,29 @@ robot_description. Populate it with the following contents.
     </launch>
 ```
 
-* Build the robot_description package using `catkin build`, which will make it
-a ROS-package. From sensor-integration directory run the following:
-    * `catkin build robot_description`
-
-* Source the development package path, to ensure robot_description package is
+* Build the `robot_description` package to make it a ROS-package. From the `sensor-integration` directory run:
+     ```bash
+     catkin build robot_description
+     ```
+* Source the development package path, to ensure `robot_description` package is
 discoverable in your shell environment (e.g. callable while using `rospack` command).
-    * `source devel/setup.bash` (or `source devel/setup.zsh` if you're using zsh shell)
-
+    ```bash
+    source devel/setup.bash
+  
+    # Use the following if you're using zsh shell
+    # source devel/setup.zsh
+    ```
 * Launch the modelled-robot through the `display.launch` and `robot.urdf` files that we just created.
+    ```bash
+    roslaunch robot_description display.launch model:=`rospack find robot_description`/urdf/robot.urdf use_gui:=true
+    ```
+* An RViz window should launch. Make the following changes:
+  * Set "Fixed Frame" to `base_link`. (**Note**: RViz sets this to `map` by default)
+  * Add `RobotModel` display via the "Add" button.
 
-```bash
-roslaunch robot_description display.launch model:=`rospack find robot_description`/urdf/robot.urdf use_gui:=true
-```
-
-Above command should launch an Rviz window, something similar to the image shown
-below:
+If successful you should see an output similar to the following image
 
 ![rviz_window](./resources/images/rviz_launch.png)
-
-Rviz by default sets the Fixed Frame to `map` frame. Please change it to
-`base_link` frame and add `RobotModel` display via the "Add" button.
-
 
 ##### Brief description of URDF file
 
