@@ -101,42 +101,37 @@ If successful you should see an output similar to the following image
 
 ##### Brief description of URDF file
 
-We breakdown the parts of robot.urdf briefly in this section.
+We break down the parts of `robot.urdf` briefly in this section.
 
-* `<link>` element : Describes a rigid body with an inertia, visual features,
-and collision properties.
+* [`<link>`][urdf-link] element: Describes a rigid body with an inertia, visual features, and collision properties.
+  * In the below snippet, we describe the base of the robot `base_link` which has a box-geometry with visual attributes like its color.
 
-In the below snippet, we describe the base of the
-robot `base_link` which has a box-geometry with visual attributes like its color.
+  ```XML
+  <link name="base_link">
+      <visual>
+          <geometry>
+              <box size="0.2 .3 .1"/>
+          </geometry>
+          <origin rpy="0 0 0" xyz="0 0 0.05"/>
+          <material name="white">
+              <color rgba="1 1 1 1"/>
+          </material>
+      </visual>
+  </link>
+  ```
 
-```XML
-<link name="base_link">
-    <visual>
-        <geometry>
-            <box size="0.2 .3 .1"/>
-        </geometry>
-        <origin rpy="0 0 0" xyz="0 0 0.05"/>
-        <material name="white">
-            <color rgba="1 1 1 1"/>
-        </material>
-    </visual>
-</link>
-```
-
-* `<joint>` element : Describes the kinematics and dynamics of a joint between
-two _links_, along with its safety limits.
-
-Below _joint_ description provides details on how the *base_link* and *wheel_1*
-links are connected. Take note of the joint type `fixed`, which means *wheel_1*
+* [`<joint>`][urdf-joint] element: Describes the kinematics and dynamics of a joint between two _links_, along with its safety limits. 
+  * In the below snippet, the _joint_ description provides details on how the *base_link* and *wheel_1* links are connected. 
+  * Take note of the joint type `fixed`, which means *wheel_1*
 has a fixed connection with *base_link*, with all degrees-of-freedom locked.
 
- ```XML
-<joint name="base_to_wheel1" type="fixed">
-	<parent link="base_link"/>
-	<child link="wheel_1"/>
-	<origin xyz="0 0 0"/>
-</joint>
- ```
+   ```XML
+  <joint name="base_to_wheel1" type="fixed">
+      <parent link="base_link"/>
+      <child link="wheel_1"/>
+      <origin xyz="0 0 0"/>
+  </joint>
+   ```
 
 For more information on the XML tags of URDF file, please refer to its
 documentation [here](http://wiki.ros.org/urdf/XML).
@@ -347,3 +342,5 @@ its [source](https://github.com/husky/husky.git) might give you few pointers.
 [ros-urdf-tutorial]: https://wiki.ros.org/urdf_tutorial
 
 [urdf]: http://wiki.ros.org/urdf/XML/model
+[urdf-link]: http://wiki.ros.org/urdf/XML/link
+[urdf-joint]: http://wiki.ros.org/urdf/XML/joint
