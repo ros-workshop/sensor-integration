@@ -47,8 +47,6 @@ root Link: base_link has 3 child(ren)
     child(3):  wheel_3
 ```
 
-**Exercise**: Update `robot.urdf` to include the missing component
-
 #### Launch the robot simulation
 
 For launching a simulation of an URDF modeled-robot, we require a few
