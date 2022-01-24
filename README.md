@@ -49,33 +49,31 @@ root Link: base_link has 3 child(ren)
 
 #### Launch the robot simulation
 
-For launching a simulation of an URDF modeled-robot, we require a few
-packages to be built as dependencies:
+To launch a simulation of an URDF modelled-robot, we will need to create a `launch` file
 
-* **urdf_tutorial** : `rosdep install urdf_tutorial`
-* **robot_state_publisher** : `rosdep install robot_state_publisher`
-* **joint_state_publisher** : `rosdep install joint_state_publisher`
-
-We'll come back to the nodes `joint_state_publisher` and `robot_state_publisher`
-soon. For now, let's launch the simulation by doing the following:
-
-* Create a ROS-launch file named `display.launch` in [`src/robot_description/launch`](src/robot_description/launch) 
-* Populate it with the following contents.
-
-```XML
-<?xml version="1.0"?>
-    <launch>
-        <arg name="model" />
-        <arg name="gui" default="False" />
-
-        <param name="robot_description" command="$(find xacro)/xacro --inorder $(arg model)" />
-        <param name="use_gui" value="$(arg gui)"/>
-        
-        <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
-        <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
-        <node name="rviz" pkg="rviz" type="rviz" args="-d $(find urdf_tutorial)/urdf.rviz" />
-    </launch>
-```
+* Create a ROS-launch file named `display.launch` in [`src/robot_description/launch`](src/robot_description/launch). 
+* Populate it with the following content
+    ```XML
+    <?xml version="1.0"?>
+        <launch>
+            <arg name="model" />
+            <arg name="gui" default="False" />
+    
+            <param name="robot_description" command="$(find xacro)/xacro --inorder $(arg model)" />
+            <param name="use_gui" value="$(arg gui)"/>
+            
+            <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
+            <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+            <node name="rviz" pkg="rviz" type="rviz" args="-d $(find urdf_tutorial)/urdf.rviz" />
+        </launch>
+    ```
+    **Note**: The following packages are used in this `launch` file and were installed when you installed the `desktop` or `desktop-full` version of ROS.
+    * **joint_state_publisher**: https://wiki.ros.org/joint_state_publisher
+    * **robot_state_publisher**: https://wiki.ros.org/robot_state_publisher
+    * **urdf_tutorial**: https://wiki.ros.org/urdf_tutorial
+       
+We'll come back to the nodes [`joint_state_publisher`][ros-joint-state-publisher] and [`robot_state_publisher`][ros-robot-state-publisher] soon. 
+For now, let's launch the simulation by doing the following:
 
 * Build the `robot_description` package to make it a ROS-package. From the `sensor-integration` directory run:
      ```bash
@@ -343,5 +341,9 @@ its [source](https://github.com/husky/husky.git) might give you few pointers.
 2. Collision and Inertial properties: (http://wiki.ros.org/urdf/Tutorials/Adding%20Physical%20and%20Collision%20Properties%20to%20a%20URDF%20Model
 3. Xacro file format: http://wiki.ros.org/urdf/Tutorials/Using%20Xacro%20to%20Clean%20Up%20a%20URDF%20File
 
+
+[ros-joint-state-publisher]: http://wiki.ros.org/joint_state_publisher
+[ros-robot-state-publisher]: http://wiki.ros.org/robot_state_publisher
+[ros-urdf-tutorial]: https://wiki.ros.org/urdf_tutorial
 
 [urdf]: http://wiki.ros.org/urdf/XML/model
