@@ -220,34 +220,47 @@ and velocity) as read from its URDF file. This node publishes to the `/joint_sta
 and continuously publishes the relative transforms between the joints on TF, using
 its internal kinematics map that tracks the joints with respect to one another.
 
-
 ## Sensor Integration
 
-In this section, we'll work with the simulated model of [Clearpath Husky](https://www.clearpathrobotics.com/husky-unmanned-ground-vehicle-robot/).
-We will first launch it in Gazebo, which will provide us the environment that the
-robot will interact with and then we'll control its movements.
+In this section, we'll work with a simulated model of a [Clearpath Husky](https://www.clearpathrobotics.com/husky-unmanned-ground-vehicle-robot/).
+
+We will first launch it in Gazebo, which will provide us the environment that the robot will interact with, and then we'll control its movements.
 
 ### Gazebo Simulation
 
 #### Dependencies
 
-`husky_simulator` and `husky_viz` are the packages that we'll be working with.
+`husky_simulator` and `husky_viz` are the packages that we'll be working with. You would have installed these in the "Preparation" section.
 
 #### Running Husky in Gazebo
 
+Run the following commands in separate terminals
+
 ```sh
-roslaunch husky_gazebo husky_empty_world.launch  # Launches Husky with SICK LiDAR and and IMU, in an empty world within Gazebo.
-roslaunch husky_viz view_robot.launch  # Launches the Rviz window showing Husky model and the measurements received by its LiDAR sensor.
+# Launches Husky with a SICK LMS1XX LiDAR and and IMU, in an empty world within Gazebo.
+export HUSKY_LMS1XX_ENABLED=1
+roslaunch husky_gazebo husky_empty_world.launch
+```
+```sh
+# Launches the RViz window showing Husky model and the measurements received by its LiDAR sensor.
+roslaunch husky_viz view_robot.launch
 ```
 
-You should be able to see Gazebo and Rviz windows as shown below.
+You should be able to see Gazebo and RViz windows as shown below.
 
 ![Gazebo Husky](./resources/images/gazebo_husky.png)
 
-![Rviz Husky](./resources/images/rviz_husky.png)
+![RViz Husky](./resources/images/rviz_husky.png)
 
-Experiment with adding objects (e.g. a box) on Gazebo and view its LiDAR scan
-lines on Rviz.
+**Exercises**:
+* Add objects (e.g. a box) in Gazebo and view its LiDAR scan lines on RViz.
+* Try a Velodyne VLP-16 LIDAR 
+  * See the following documentation: [Customize Husky Configuration](https://www.clearpathrobotics.com/assets/guides/noetic/husky/CustomizeHuskyConfig.html)
+  * **Note**: The VLP-16 will publish under `PointCloud2`. Is it subscribed to the correct topic?
+* Try loading the Husky in a more complex world
+  ```shell
+  roslaunch husky_gazebo husky_playpen.launch
+  ```
 
 #### Exercise: Viewing TF tree and topics map
 
