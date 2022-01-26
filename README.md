@@ -149,7 +149,8 @@ Look for the solution below in case you can't complete the model.
 <details>
 <summary><b>Solution</b>: Missing URDF components</summary>
 
-&#60;link&#62; `"wheel_4"` to add a fourth wheel to the model.
+<br>&#60;link&#62; `"wheel_4"` to add a fourth wheel to the model.
+
 ```XML
 <link name="wheel_4">
     <visual>
@@ -162,7 +163,7 @@ Look for the solution below in case you can't complete the model.
 </link>
 ```
 
-&#60;joint&#62; `"base_to_wheel4"` to connect `wheel_4` to the robot's `base_link`.
+<br>&#60;joint&#62; `"base_to_wheel4"` to connect `wheel_4` to the robot's `base_link`.
 
 ```XML
 <joint name="base_to_wheel4" type="fixed">
