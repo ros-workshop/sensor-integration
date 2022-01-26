@@ -4,6 +4,20 @@ In this session, we look into modeling simulated robots and integrate
 sensors like LiDAR and Inertial Measurement Unit (IMU) to make a mobile-robot
 move from one place to another.
 
+## Preparation
+To complete this workshop you will need to have the following applications installed
+```bash
+sudo apt install liburdfdom-tools
+sudo apt install ros-$ROS_DISTRO-husky-simulator
+sudo apt install ros-$ROS_DISTRO-husky-viz
+```
+
+**Note**:
+* Using the `$ROS_DISTRO` environment variable will ensure that you install the correct application for your ROS installation
+  * i.e. For a `noetic` installation, running the command: `echo $ROS_DISTRO` should return `noetic`
+* If nothing is returned, you may not have "sourced" you ROS environment correctly
+  * i.e. For a correctly sourced installation, running the command: `printenv | grep ROS` should return a list of `ROS` prefixed environment variables
+
 ## 3D Modelling and Simulation
 
 Simulation and visualisations of sensors with a virtual model of our robot helps
@@ -28,8 +42,6 @@ Please go through the URDF file `robot.urdf` in
 
 Check whether the model is complete, and the list of components using the below
 commands.
-
-**Note**: You may need to run `sudo apt-get install liburdfdom-tools`.
 
 ```bash
 cd src/robot_description/urdf
@@ -220,12 +232,6 @@ robot will interact with and then we'll control its movements.
 #### Dependencies
 
 `husky_simulator` and `husky_viz` are the packages that we'll be working with.
-Install these dependencies using below commands.
-
-```sh
-sudo apt install ros-melodic-husky-simulator
-sudo apt install ros-melodic-husky-viz
-```
 
 #### Running Husky in Gazebo
 
