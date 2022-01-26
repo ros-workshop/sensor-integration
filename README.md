@@ -139,19 +139,17 @@ documentation [here](http://wiki.ros.org/urdf/XML).
 
 #### Exercise: Missing URDF Components
 
-You might have noticed a missing component in the robot-model shown on Rviz.
-Complete the model in the URDF file to add the missing component. And relaunch
-`display.launch` file using the section above:
-[Launch the robot simulation](#launch-the-robot-simulation).
+You might have noticed a missing component in the robot-model shown on RViz.
+
+Complete the model in the URDF file to add the missing component and relaunch
+`display.launch` using the steps in the previous section ([Launch the robot simulation](#launch-the-robot-simulation))
 
 Look for the solution below in case you can't complete the model.
 
 <details>
-<summary>Solution: Missing URDF components</summary>
-<br>
+<summary><b>Solution</b>: Missing URDF components</summary>
 
-A link for wheel-4.<br>
-
+&#60;link&#62; `"wheel_4"` to add a fourth wheel to the model.
 ```XML
 <link name="wheel_4">
     <visual>
@@ -164,8 +162,7 @@ A link for wheel-4.<br>
 </link>
 ```
 
-<br><br>
-A joint connecting wheel-4 to the robot's base-link.<br>
+&#60;joint&#62; `"base_to_wheel4"` to connect `wheel_4` to the robot's `base_link`.
 
 ```XML
 <joint name="base_to_wheel4" type="fixed">
@@ -176,37 +173,36 @@ A joint connecting wheel-4 to the robot's base-link.<br>
 ```
 </details>
 
-
 #### Adding collision and inertial properties
 
-We finish our (box) robot description by adding collision and inertial properties
+We finish our (box) robot description by adding `<collision>` and `<inertial>` properties
 to its links. These properties are required when we run the simulation in an
 environment supporting a physics engine e.g. Gazebo.
 
-Complete description of the robot could be found in `robot1.urdf` in urdf/
-directory.
+A complete description of the robot including these properties are shown in [`robot1.urdf`][robot1-urdf] 
+in the [`src/robot_description/urdf`](src/robot_description/urdf) directory.
 
-Notes:
+**Notes**:
 * Notice the `<collision>` and `<inertial>` tags for each `<link>` element in
-robot1.urdf.
-* Take note of `robot1.xacro` in urdf/ directory. Xacro formats provide an efficient
+`robot1.urdf`.
+* Take note of [`robot1.xacro`][robot1-xacro] in the [urdf/](src/robot_description/urdf) directory. `.xacro` files provide an efficient
 way to reduce the size and complexity of URDF files by [using constants, simple math
 expressions, and macros](http://wiki.ros.org/urdf/Tutorials/Using%20Xacro%20to%20Clean%20Up%20a%20URDF%20File).
 
-For more details on collision and inertial properties, go through their [docs](http://wiki.ros.org/urdf/Tutorials/Adding%20Physical%20and%20Collision%20Properties%20to%20a%20URDF%20Model).
+For more details on collision and inertial properties, go through their the tutorial: 
+["Adding Physical and Collision Properties to a URDF Model"](http://wiki.ros.org/urdf/Tutorials/Adding%20Physical%20and%20Collision%20Properties%20to%20a%20URDF%20Model)
 
 
 #### Details on simulating modelled robots
 
 Earlier we used two packages in our launch file to spin up our modelled-robot:
-[joint_state_publisher](http://wiki.ros.org/joint_state_publisher) and
-[robot_state_publisher](http://wiki.ros.org/robot_state_publisher).
+[`joint_state_publisher`][ros-joint-state-publisher] and
+[`robot_state_publisher`][ros-robot-state-publisher].
+
 Few notes on these packages below:
-
-* joint_state_publisher : Publishes a robot joints' state information (position
-and velocity), as read from its URDF file. Topic that it publishes on : `/joint_states`.
-
-* robot_state_publisher : Broadcasts the state of the robot to the
+* [`joint_state_publisher`][ros-joint-state-publisher]: Publishes a robot joints' state information (position
+and velocity) as read from its URDF file. This node publishes to the `/joint_states` topic.
+* [`robot_state_publisher`][ros-robot-state-publisher] : Broadcasts the state of the robot to the
 [TF transform](http://wiki.ros.org/tf2) library. Listens on `/joint_states` topic
 and continuously publishes the relative transforms between the joints on TF, using
 its internal kinematics map that tracks the joints with respect to one another.
@@ -336,6 +332,8 @@ its [source](https://github.com/husky/husky.git) might give you few pointers.
 2. Collision and Inertial properties: (http://wiki.ros.org/urdf/Tutorials/Adding%20Physical%20and%20Collision%20Properties%20to%20a%20URDF%20Model
 3. Xacro file format: http://wiki.ros.org/urdf/Tutorials/Using%20Xacro%20to%20Clean%20Up%20a%20URDF%20File
 
+[robot1-urdf]: src/robot_description/urdf/robot1.urdf
+[robot1-xacro]: src/robot_description/urdf/robot1.xacro
 
 [ros-joint-state-publisher]: http://wiki.ros.org/joint_state_publisher
 [ros-robot-state-publisher]: http://wiki.ros.org/robot_state_publisher
