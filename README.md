@@ -265,41 +265,26 @@ You should be able to see Gazebo and RViz windows as shown below.
 #### Exercise: Viewing TF tree and topics map
 
 It is (always) recommended to view the TF tree and the map of topics that are
-active. Make use of `tf` and `rqt_graph` package's commands to view this
+active. Make use of `rqt_tftree` and `rqt_graph` package's commands to view this
 information.
 
 <details>
 <summary>Solution: Viewing TF tree</summary>
 
-Either 
-1. Run view_frames node.
-
-	```
-	rosrun tf view_frames
-	```
-
-2. And view the generated TF tree.
-
-	```
-	evince frames.pdf
-	```
-
-Or, use rqt_tftree:
-
-	```
-	rosrun rqt_tf_tree rqt_tf_tree
-	```
+Run the `rqt_tftree` package:
+```bash
+rosrun rqt_tf_tree rqt_tf_tree
+```
 
 </details>
 
 <details>
 <summary>Solution: Viewing the ROS node graph</summary>
 
-Run rqt_graph to view the nodes and topics.
-
-	```
-	rosrun rqt_graph rqt_graph
-	```
+Run the `rqt_graph` package to view the nodes and topics.
+```bash
+rosrun rqt_graph rqt_graph
+```
 
 </details>
 
