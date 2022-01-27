@@ -8,6 +8,7 @@ move from one place to another.
 To complete this workshop you will need to have the following applications installed
 ```bash
 sudo apt install liburdfdom-tools
+sudo apt install ros-$ROS_DISTRO-tf2-tools
 sudo apt install ros-$ROS_DISTRO-husky-simulator
 sudo apt install ros-$ROS_DISTRO-husky-viz
 ```
@@ -265,13 +266,26 @@ You should be able to see Gazebo and RViz windows as shown below.
 #### Exercise: Viewing TF tree and topics map
 
 It is (always) recommended to view the TF tree and the map of topics that are
-active. Make use of `rqt_tftree` and `rqt_graph` package's commands to view this
+active. Make use of `tf2_tools` (or `rqt_tf_tree`) and `rqt_graph` package's commands to view this
 information.
 
 <details>
 <summary>Solution: Viewing TF tree</summary>
 
-Run the `rqt_tftree` package:
+Either 
+1. Run view_frames node.
+
+	```bash
+	rosrun tf2_tools view_frames.py
+	```
+
+2. And view the generated TF tree.
+
+   ```bash
+   evince frames.pdf
+   ``` 
+
+Or, Run the `rqt_tf_tree` package:
 ```bash
 rosrun rqt_tf_tree rqt_tf_tree
 ```
