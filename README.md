@@ -13,11 +13,14 @@ sudo apt install ros-$ROS_DISTRO-husky-simulator
 sudo apt install ros-$ROS_DISTRO-husky-viz
 ```
 
-**Note**:
+<details>
+<summary>Notes on using <code>$ROS_DISTRO</code></summary>
+
 * Using the `$ROS_DISTRO` environment variable will ensure that you install the correct application for your ROS installation
-  * i.e. For a `noetic` installation, running the command: `echo $ROS_DISTRO` should return `noetic`
-* If nothing is returned, you may not have "sourced" your ROS environment correctly
+  * i.e. Running the command: `echo $ROS_DISTRO` should return `noetic` for a `noetic` installation
+* Note: If nothing is returned, you may not have "sourced" your ROS environment correctly
   * i.e. For a correctly sourced installation, running the command: `printenv | grep ROS` should return a list of `ROS` prefixed environment variables
+</details>
 
 ## 3D Modelling and Simulation
 
