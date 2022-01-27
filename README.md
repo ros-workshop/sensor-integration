@@ -309,8 +309,9 @@ rosrun rqt_graph rqt_graph
 
 From the above exercise on viewing topics' map, you might have noticed that Husky
 simulation has a `/husky_velocity_controller/cmd_vel` namespace topic published
-by `/twist_mux` node and subscribed by `gazebo` node. We will make use of this
-topic to publish `geometry_msgs/Twist` messages to make Husky move.
+by `/twist_mux` node and subscribed by `gazebo` node. 
+
+We will make use of this topic to publish `geometry_msgs/Twist` messages to make Husky move.
 
 ```sh
 rostopic pub -r 10 /husky_velocity_controller/cmd_vel geometry_msgs/Twist  '{linear:  {x: 0.1, y: 0.0, z: 0.0}, angular: {x: 0.0,y: 0.0,z: 0.0}}'
@@ -319,10 +320,9 @@ rostopic pub -r 10 /husky_velocity_controller/cmd_vel geometry_msgs/Twist  '{lin
 #### Exercise: Making Husky move in circles
 
 In this exercise you'll write a ROS node that commands the simulated Husky to
-move in a circular path. Make use of [husky_controller](src/husky_controller)
-package in this repository. Complete the `circle_driver.cpp` file to publish appropriate
-messages to `/husky_velocity_controller/cmd_vel` topic. Make sure to compile and
-source the `devel/setup.bash` directory for your node to be included in the _path_.
+move in a circular path. Make use of the  [husky_controller](src/husky_controller) package in this repository. 
+* Complete the `circle_driver.cpp` file to publish appropriate messages to `/husky_velocity_controller/cmd_vel` topic. 
+* Make sure to compile and source the `devel/setup.bash` directory for your node to be included in the _path_.
 
 You are welcome to write the `circle_driver` node in Python.
 
@@ -330,7 +330,7 @@ You are welcome to write the `circle_driver` node in Python.
 <summary> Solution: Making Husky move in circles </summary>
 <br>
 Find a sample way to achieve this task in
-[circle_driver_solution.md](./resources/solution/circle_driver_solution.md)
+<a href="resources/solutions/circle_driver_solution.md">circle_driver_solution.md</a>
 
 </details>
 
