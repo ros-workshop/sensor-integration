@@ -8,3 +8,8 @@ devel
 
 # Tutorial files
 src/robot_description/launch/display.launch
+src/husky_controller/launch/circle_driver.launch
+
+# Files created from tf2_tools
+**/frames.gv
+**/frames.pdf
