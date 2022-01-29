@@ -321,10 +321,9 @@ rostopic pub -r 10 /husky_velocity_controller/cmd_vel geometry_msgs/Twist  '{lin
 
 In this exercise you'll write a ROS node that commands the simulated Husky to
 move in a circular path. Make use of the  [husky_controller](src/husky_controller) package in this repository. 
-* Complete the `circle_driver.cpp` file to publish appropriate messages to `/husky_velocity_controller/cmd_vel` topic. 
-* Make sure to compile and source the `devel/setup.bash` directory for your node to be included in the _path_.
-
-You are welcome to write the `circle_driver` node in Python.
+* The ROS node will need to publish messages to the `/husky_velocity_controller/cmd_vel` topic.
+  Use either the `circle_driver.cpp` or `circle_driver_python.py` to get started with this task.
+* **Note**: Make sure to compile and source the `devel/setup.bash` directory for your node to be included in the _path_.
 
 <details>
 <summary> Solution: Making Husky move in circles </summary>
