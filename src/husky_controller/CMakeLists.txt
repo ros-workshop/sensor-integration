@@ -7,12 +7,7 @@ find_package(catkin REQUIRED COMPONENTS
   std_msgs
 )
 
-catkin_package(
-#  INCLUDE_DIRS include
-#  LIBRARIES ros101
-#  CATKIN_DEPENDS roscpp rospy std_msgs
-#  DEPENDS system_lib
-)
+catkin_package()
 
 include_directories(
   ${catkin_INCLUDE_DIRS}
@@ -25,3 +20,8 @@ add_executable(circle_driver src/circle_driver.cpp)
 target_link_libraries(circle_driver
    ${catkin_LIBRARIES}
  )
+
+# Setup python env
+catkin_python_setup()
+catkin_install_python(PROGRAMS src/circle_driver_python
+  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
