@@ -54,7 +54,7 @@ check_urdf robot.urdf
 
 The following output will be shown.
 
-```shell
+```bash
 robot name is: robot1
 ---------- Successfully Parsed XML ---------------
 root Link: base_link has 3 child(ren)
@@ -69,20 +69,20 @@ To launch a simulation of an URDF modelled-robot, we will need to create a `laun
 
 * Create a ROS-launch file named `display.launch` in [`src/robot_description/launch`](src/robot_description/launch). 
 * Populate it with the following content
-    ```XML
-    <?xml version="1.0"?>
-        <launch>
-            <arg name="model" />
-            <arg name="gui" default="False" />
-    
-            <param name="robot_description" command="$(find xacro)/xacro --inorder $(arg model)" />
-            <param name="use_gui" value="$(arg gui)"/>
-            
-            <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
-            <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
-            <node name="rviz" pkg="rviz" type="rviz" args="-d $(find urdf_tutorial)/urdf.rviz" />
-        </launch>
-    ```
+  ```XML
+  <?xml version="1.0"?>
+      <launch>
+          <arg name="model" />
+          <arg name="gui" default="False" />
+  
+          <param name="robot_description" command="$(find xacro)/xacro --inorder $(arg model)" />
+          <param name="use_gui" value="$(arg gui)"/>
+          
+          <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
+          <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+          <node name="rviz" pkg="rviz" type="rviz" args="-d $(find urdf_tutorial)/urdf.rviz" />
+      </launch>
+  ```
     **Note**: The following packages are used in this `launch` file and were installed when you installed the `desktop` or `desktop-full` version of ROS.
     * **joint_state_publisher**: https://wiki.ros.org/joint_state_publisher
     * **robot_state_publisher**: https://wiki.ros.org/robot_state_publisher
@@ -92,21 +92,21 @@ We'll come back to the nodes [`joint_state_publisher`][ros-joint-state-publisher
 For now, let's launch the simulation by doing the following:
 
 * Build the `robot_description` package to make it a ROS-package. From the `sensor-integration` directory run:
-     ```bash
-     catkin build robot_description
-     ```
+  ```bash
+  catkin build robot_description
+  ```
 * Source the development package path, to ensure `robot_description` package is
 discoverable in your shell environment (e.g. callable while using `rospack` command).
-    ```bash
-    source devel/setup.bash
+  ```bash
+  source devel/setup.bash
   
-    # Use the following if you're using zsh shell
-    # source devel/setup.zsh
-    ```
+  # Use the following if you're using zsh shell
+  # source devel/setup.zsh
+  ```
 * Launch the modelled-robot through the `display.launch` and `robot.urdf` files that we just created.
-    ```bash
-    roslaunch robot_description display.launch model:=`rospack find robot_description`/urdf/robot.urdf use_gui:=true
-    ```
+  ```bash
+  roslaunch robot_description display.launch model:=`rospack find robot_description`/urdf/robot.urdf use_gui:=true
+  ```
 * An RViz window should launch. Make the following changes:
   * Set "Fixed Frame" to `base_link`. (**Note**: RViz sets this to `map` by default)
   * Add `RobotModel` display via the "Add" button.
@@ -141,13 +141,13 @@ We break down the parts of `robot.urdf` briefly in this section.
   * Take note of the joint type `fixed`, which means *wheel_1*
 has a fixed connection with *base_link*, with all degrees-of-freedom locked.
 
-   ```XML
+  ```XML
   <joint name="base_to_wheel1" type="fixed">
       <parent link="base_link"/>
       <child link="wheel_1"/>
       <origin xyz="0 0 0"/>
   </joint>
-   ```
+  ```
 
 For more information on the XML tags of URDF file, please refer to its
 documentation [here](http://wiki.ros.org/urdf/XML).
@@ -240,12 +240,12 @@ We will first launch it in Gazebo, which will provide us the environment that th
 
 Run the following commands in separate terminals
 
-```sh
+```bash
 # Launches Husky with a SICK LMS1XX LiDAR and and IMU, in an empty world within Gazebo.
 export HUSKY_LMS1XX_ENABLED=1
 roslaunch husky_gazebo husky_empty_world.launch
 ```
-```sh
+```bash
 # Launches the RViz window showing Husky model and the measurements received by its LiDAR sensor.
 roslaunch husky_viz view_robot.launch
 ```
@@ -262,7 +262,8 @@ You should be able to see Gazebo and RViz windows as shown below.
   * See the following documentation: [Customize Husky Configuration](https://www.clearpathrobotics.com/assets/guides/noetic/husky/CustomizeHuskyConfig.html)
   * **Note**: The VLP-16 will publish under `PointCloud2`. Is it subscribed to the correct topic?
 * Try loading the Husky in a more complex world
-  ```shell
+
+  ```bash
   roslaunch husky_gazebo husky_playpen.launch
   ```
 
@@ -278,15 +279,15 @@ information.
 Either 
 1. Run view_frames node.
 
-	```bash
-	rosrun tf2_tools view_frames.py
-	```
+  ```bash
+  rosrun tf2_tools view_frames.py
+  ```
 
 2. And view the generated TF tree.
 
-   ```bash
-   evince frames.pdf
-   ``` 
+  ```bash
+  evince frames.pdf
+  ``` 
 
 Or, Run the `rqt_tf_tree` package:
 ```bash
@@ -313,7 +314,7 @@ by `/twist_mux` node and subscribed by `gazebo` node.
 
 We will make use of this topic to publish `geometry_msgs/Twist` messages to make Husky move.
 
-```sh
+```bash
 rostopic pub -r 10 /husky_velocity_controller/cmd_vel geometry_msgs/Twist  '{linear:  {x: 0.1, y: 0.0, z: 0.0}, angular: {x: 0.0,y: 0.0,z: 0.0}}'
 ```
 
