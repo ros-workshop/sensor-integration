@@ -264,8 +264,17 @@ You should be able to see Gazebo and RViz windows as shown below.
 * Try loading the Husky in a more complex world
 
   ```bash
+  # Look to the "important note" below if this doesn't load
   roslaunch husky_gazebo husky_playpen.launch
   ```
+
+**Important Note**: <br>
+You may run into a problem when trying to launch the Gazebo Husky Pen if you have not launched a complex Gazebo world before.
+Every model that is being loaded will be silently downloaded in the background if the computor does not have it.
+This does not always work and is slow regardless.
+
+Follow [this link](https://github.com/osrf/gazebo_models) to find a model repository and google how to download them manually.
+
 
 #### Exercise: Viewing TF tree and topics map
 
