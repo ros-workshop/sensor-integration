@@ -1,11 +1,12 @@
 # Sensor Integration
 
-In this session, we look into modeling simulated robots and integrate
-sensors like LiDAR and Inertial Measurement Unit (IMU) to make a mobile-robot
-move from one place to another.
+In this session, we work with a simulated mobile robot to integrate
+sensors such as lidar and an Inertial Measurement Unit (IMU). At the end of this session you'll have a simulated mobile robot driving around.
+
+Using 3D simulators such as [Gazebo](https://gazebosim.org), we can attach simulated sensors to simulated robots to visualise their sensor data and evaluate different robot algorithms and behaviours.
 
 ## Preparation
-To complete this workshop you will need to have the following applications installed
+To complete this session you will need to have the following packages installed:
 ```bash
 sudo apt install liburdfdom-tools
 sudo apt install ros-$ROS_DISTRO-tf2-tools
@@ -22,22 +23,14 @@ sudo apt install ros-$ROS_DISTRO-husky-viz
   * i.e. For a correctly sourced installation, running the command: `printenv | grep ROS` should return a list of `ROS` prefixed environment variables
 </details>
 
-## 3D Modelling and Simulation
 
-Simulation and visualisations of sensors with a virtual model of our robot helps
-us to test various techniques for achieving different robot behaviours.
+## URDF Files
 
-### URDF
+The [Unified Robot Description Format (URDF)][urdf] is an XML format that describes a robot's hardware, including it's chassis, linkages, joints, sensor placement, etc. Take a look at NASA's [Robonaut](https://github.com/gkjohnson/nasa-urdf-robots) to see what's possible with robot URDFs.
 
-[Unified Robot Description Format (URDF)][urdf] is an XML format that describes a robot,
-its parts, its joints, dimensions, etc. For A 3D robot on ROS, for example,
-[the Robonaut (NASA)](https://github.com/gkjohnson/nasa-urdf-robots), a URDF
-file is associated with it.
+In the first part of this session, we'll add a simulated arm and gripper to  a mobile robot-- we'll then work up to controlling its movement in simulation.
 
-Let's build a mobile-robot which has an arm
-mounted on it with a gripper and control its movement in a simulated environment.
-
-#### Create the robot model
+### Create the robot model
 
 In this section, we'll work with the
 [robot_description package](./src/robot_description) in this repository.
@@ -95,13 +88,9 @@ For now, let's launch the simulation by doing the following:
   ```bash
   catkin build robot_description
   ```
-* Source the development package path, to ensure `robot_description` package is
-discoverable in your shell environment (e.g. callable while using `rospack` command).
+* Source the development package path, to ensure `robot_description` package is discoverable in your shell environment (e.g. callable while using `rospack` command).
   ```bash
   source devel/setup.bash
-  
-  # Use the following if you're using zsh shell
-  # source devel/setup.zsh
   ```
 * Launch the modelled-robot through the `display.launch` and `robot.urdf` files that we just created.
   ```bash
@@ -241,12 +230,12 @@ We will first launch it in Gazebo, which will provide us the environment that th
 Run the following commands in separate terminals
 
 ```bash
-# Launches Husky with a SICK LMS1XX LiDAR and and IMU, in an empty world within Gazebo.
+# Launches Husky with a SICK LMS1XX lidar and and IMU, in an empty world within Gazebo.
 export HUSKY_LMS1XX_ENABLED=1
 roslaunch husky_gazebo husky_empty_world.launch
 ```
 ```bash
-# Launches the RViz window showing Husky model and the measurements received by its LiDAR sensor.
+# Launches the RViz window showing Husky model and the measurements received by its lidar sensor.
 roslaunch husky_viz view_robot.launch
 ```
 
@@ -257,8 +246,8 @@ You should be able to see Gazebo and RViz windows as shown below.
 ![RViz Husky](./resources/images/rviz_husky.png)
 
 **Exercises**:
-* Add objects (e.g. a box) in Gazebo and view its LiDAR scan lines on RViz.
-* Try a Velodyne VLP-16 LIDAR 
+* Add objects (e.g. a box) in Gazebo and view its lidar scan lines on RViz.
+* Try a Velodyne VLP-16 lidar 
   * See the following documentation: [Customize Husky Configuration](https://www.clearpathrobotics.com/assets/guides/noetic/husky/CustomizeHuskyConfig.html)
   * **Note**: The VLP-16 will publish under `PointCloud2`. Is it subscribed to the correct topic?
 * Try loading the Husky in a more complex world
@@ -351,7 +340,7 @@ it is less than 5 metres away from the box.
   * Make use of the logic in `circle_driver` above that publishes commands to
   Husky's `/husky_velocity_controller/cmd_vel` topic.
 
-  * A ROS node that subscribes to LiDAR scans, observes the distance from an
+  * A ROS node that subscribes to lidar scans, observes the distance from an
   object, and sends commands similar to `circle_driver` node.
 
 2. Find a way to integrate Kinect camera onto the simulated Husky. Going through
