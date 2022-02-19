@@ -1,21 +1,24 @@
 #!/usr/bin/env python3
 import rospy
-# TODO: Include the appropriate library for sending Twist messages.
+from geometry_msgs.msg import Twist
 
 
 def main():
     rospy.init_node(name='husky_controller')
 
-    # TODO: Create a publisher that publishes to husky_velocity_controller/cmd_vel topic.
+    pub = rospy.Publisher(
+        name="husky_velocity_controller/cmd_vel",
+        data_class=Twist,
+        queue_size=1
+    )
 
-    # Allows the publisher to publish at 10 Hz.
     rate = rospy.Rate(10)  # 10hz
-
+    msg = Twist()
+    msg.linear.x = 0.75
+    msg.angular.z = 0.5
     while not rospy.is_shutdown():
-        # TODO: Make Husky move in circles by publishing to husky_velocity_controller/cmd_vel topic.
-
+        pub.publish(msg)
         rate.sleep()
-
 
 if __name__ == '__main__':
     try:

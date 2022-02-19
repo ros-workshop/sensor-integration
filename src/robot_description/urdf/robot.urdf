@@ -44,7 +44,15 @@
         </visual>
     </link>
     <!--TODO: Exercise: Missing URDF Components-->
-
+    <link name="wheel_4">
+        <visual>
+            <geometry>
+                <cylinder length="0.05" radius="0.05"/>
+            </geometry>
+            <origin rpy="0 1.5 0" xyz="-0.1 -0.1 0"/>
+            <material name="black"/>
+        </visual>
+    </link>
 
     <!--Describes how two links are attached-->
     <!--Attachment type could be one among fixed, continuous, floating, planar, revolute-->
@@ -64,5 +72,9 @@
         <origin xyz="0 0 0"/>
     </joint>
     <!--TODO: Exercise: Missing URDF Components-->
-
+    <joint name="base_to_wheel4" type="fixed">
+        <parent link="base_link"/>
+        <child link="wheel_4"/>
+        <origin xyz="0 0 0"/>
+    </joint>
 </robot>
