@@ -8,7 +8,7 @@ int main(int argc, char **argv) {
 
   // TODO: Create a publisher that publishes to husky_velocity_controller/cmd_vel topic.
   ros::Publisher pub = nh.advertise<geometry_msgs::Twist>(
-    "husky_velocity_controller/cmd_vel", 100
+    "husky_velocity_controller/cmd_vel", 1
   );
 
   // Allows the publisher to publish at 10 Hz.
