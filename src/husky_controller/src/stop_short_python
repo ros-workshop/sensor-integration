@@ -1,0 +1,52 @@
+#!/usr/bin/env python3
+import rospy
+from geometry_msgs.msg import Twist
+from sensor_msgs.msg import LaserScan
+
+class StopShort:
+    def __init__(self) -> None:
+        self._okay = False
+        self._scan_window = 20
+        self._cmd = Twist()
+        self._cmd.linear.x = 0.5
+        self._pub  = rospy.Publisher(
+            "husky_velocity_controller/cmd_vel",
+            Twist,
+            queue_size=1
+        )
+        self._sub = rospy.Subscriber(
+            "/scan",
+            LaserScan,
+            self._scan_cb,
+            queue_size=5
+        )
+        
+    def _scan_cb(self, scan: LaserScan):
+        wl = int((len(scan.ranges) - self._scan_window) / 2)
+        wu = wl + self._scan_window
+        self._okay = True
+        for idx in range(wl, wu):
+            if((scan.ranges[idx] > scan.range_min) and (scan.ranges[idx] < scan.range_max) and (scan.ranges[idx] <= 5.0)):
+                print(scan.ranges[idx])
+                self._okay = False
+                break
+    
+    def loop_once(self):
+        if self._okay == True:
+            self._pub.publish(self._cmd)
+
+def main():
+    rospy.init_node(name='husky_controller')
+
+    ss = StopShort()
+
+    rate = rospy.Rate(10)  # 10hz
+    while not rospy.is_shutdown():
+        ss.loop_once()
+        rate.sleep()
+
+if __name__ == '__main__':
+    try:
+        main()
+    except rospy.ROSInterruptException:
+        pass
