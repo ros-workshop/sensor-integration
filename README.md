@@ -258,12 +258,7 @@ You should be able to see Gazebo and RViz windows as shown below.
   ```
 
 **Important Note**: <br>
-You may run into a problem when trying to launch the Gazebo Husky Pen if you have not launched a complex Gazebo world before.
-Every model that is being loaded will be silently downloaded in the background if the computor does not have it.
-This does not always work and is slow regardless.
-
-Follow [this link](https://github.com/osrf/gazebo_models) to find a model repository and google how to download them manually.
-
+Gazebo downloads and caches it's 3D assets from the internet silently.  If you haven't launched a complex Gazebo world before, it may appear to hang for ten minutes or more while the assets are downloaded in the background. The downloads are slow and often fail.  To pre-download the assets, visit [this repo](https://github.com/osrf/gazebo_models) and download the assets (Hint: Use "Download ZIP"). To install, unzip the files in `~/.gazebo/models/`.
 
 #### Exercise: Viewing TF tree and topics map
 
