@@ -215,19 +215,13 @@ its internal kinematics map that tracks the joints with respect to one another.
 
 ## Sensor Integration
 
-In this section, we'll work with a simulated model of a [Clearpath Husky](https://www.clearpathrobotics.com/husky-unmanned-ground-vehicle-robot/).
+In this section, we'll work with a simulated model of a [Clearpath Husky robot](https://www.clearpathrobotics.com/husky-unmanned-ground-vehicle-robot/). We will first launch it in Gazebo, which will provide us the environment that the robot will interact with, and then we'll control its movements.
 
-We will first launch it in Gazebo, which will provide us the environment that the robot will interact with, and then we'll control its movements.
+### Gazebo Husky Simulation
 
-### Gazebo Simulation
+**Important Note**: Gazebo downloads and caches it's 3D assets from the internet in the background.  If you haven't launched a Gazebo world before, it may appear to hang for ten minutes or more while the assets are downloaded in the background. The download servers are slow and often fail.  To pre-download the assets, visit [this repo](https://github.com/osrf/gazebo_models) and download the assets (Hint: Use "Download ZIP"). To install, unzip the files into `~/.gazebo/models/`.
 
-#### Dependencies
-
-`husky_simulator` and `husky_viz` are the packages that we'll be working with. You would have installed these in the "Preparation" section.
-
-#### Running Husky in Gazebo
-
-Run the following commands in separate terminals
+To launch a simulated world and robot, run these commands at the same time in separate terminals:
 
 ```bash
 # Launches Husky with a SICK LMS1XX lidar and and IMU, in an empty world within Gazebo.
@@ -239,7 +233,7 @@ roslaunch husky_gazebo husky_empty_world.launch
 roslaunch husky_viz view_robot.launch
 ```
 
-You should be able to see Gazebo and RViz windows as shown below.
+Gazebo and RViz windows should appear similar to these:
 
 ![Gazebo Husky](./resources/images/gazebo_husky.png)
 
@@ -256,9 +250,6 @@ You should be able to see Gazebo and RViz windows as shown below.
   # Look to the "important note" below if this doesn't load
   roslaunch husky_gazebo husky_playpen.launch
   ```
-
-**Important Note**: <br>
-Gazebo downloads and caches it's 3D assets from the internet silently.  If you haven't launched a complex Gazebo world before, it may appear to hang for ten minutes or more while the assets are downloaded in the background. The downloads are slow and often fail.  To pre-download the assets, visit [this repo](https://github.com/osrf/gazebo_models) and download the assets (Hint: Use "Download ZIP"). To install, unzip the files in `~/.gazebo/models/`.
 
 #### Exercise: Viewing TF tree and topics map
 
