@@ -223,6 +223,8 @@ In this section, we'll work with a simulated model of a [Clearpath Husky robot](
 
 To launch a simulated world and robot, run these commands at the same time in separate terminals:
 
+:turtle: Note if using Noetic: "husky_empty_world.launch" is "empty_world.launch"
+
 ```bash
 # Launches Husky with a SICK LMS1XX lidar and and IMU, in an empty world within Gazebo.
 export HUSKY_LMS1XX_ENABLED=1
@@ -243,7 +245,7 @@ Gazebo and RViz windows should appear similar to these:
 * Add objects (e.g. a box) in Gazebo and view its lidar scan lines on RViz.
 * Try a Velodyne VLP-16 lidar 
   * See the following documentation: [Customize Husky Configuration](https://www.clearpathrobotics.com/assets/guides/noetic/husky/CustomizeHuskyConfig.html)
-  * **Note**: The VLP-16 will publish under `PointCloud2`. Is it subscribed to the correct topic?
+  * **Note**: The VLP-16 will publish a `PointCloud2` topic. Is your RViz subscribed to the correct topic?
 * Try loading the Husky in a more complex world
 
   ```bash
@@ -329,8 +331,8 @@ it is less than 5 metres away from the box.
   * A ROS node that subscribes to lidar scans, observes the distance from an
   object, and sends commands similar to `circle_driver` node.
 
-2. Find a way to integrate Kinect camera onto the simulated Husky. Going through
-its [source](https://github.com/husky/husky.git) might give you few pointers.
+2. Find a way to integrate Kinect or Realsense camera onto the simulated Husky. Going through
+its [source](https://github.com/husky/husky.git) might give you few pointers. The Kinect camera [may be depreciated](https://github.com/husky/husky/blob/b32e1b941b931df402bacd61e0258c9287899ee0/husky_gazebo/CHANGELOG.rst) in husky_gazebo, if so use the Realsense. 
 
 ### References
 
