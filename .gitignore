@@ -3,9 +3,11 @@ _config.yml
 .vscode
 
 # ROS
+.catkin_tools
 .catkin_workspace
 build
 devel
+logs
 
 # Tutorial files
 src/robot_description/launch/display.launch
